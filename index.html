@@ -538,7 +538,7 @@
       });
     }
 
-    async function generateShareCard() {
+async function generateShareCard() {
       const cardCanvas = document.createElement('canvas');
       cardCanvas.width = 600;
       cardCanvas.height = 350;
@@ -599,38 +599,43 @@
       cctx.fillStyle = '#4caf50';
       cctx.fillText('Can you beat my score?', 300, 312);
 
-      // 1. Download Card Image
-      const link = document.createElement('a');
-      link.download = `snake-highscore-${highScore}.png`;
-      link.href = cardCanvas.toDataURL('image/png');
-      link.click();
-
-      // 2. Share Text & Link
       const gameUrl = window.location.href;
       const shareMessage = `🐍 I just set a high score of ${highScore} points in Snake! Can you beat my score? Play here: ${gameUrl}`;
 
-      // Try Native Mobile/Desktop Share Sheet, Fallback to Clipboard
-      if (navigator.share) {
-        try {
-          await navigator.share({
-            title: 'Snake High Score Challenge',
-            text: shareMessage,
-            url: gameUrl
-          });
-        } catch (e) {
-          // Share dismissed by user
-        }
-      } else {
-        navigator.clipboard.writeText(shareMessage).then(() => {
-          const originalText = shareBtn.textContent;
-          shareBtn.textContent = 'Image Saved & Link Copied! 📋';
-          setTimeout(() => {
-            shareBtn.textContent = originalText;
-          }, 3000);
-        });
-      }
-    }
+      // Convert canvas drawing to an Image File for Web Share API
+      cardCanvas.toBlob(async (blob) => {
+        const file = new File([blob], `snake-highscore-${highScore}.png`, { type: 'image/png' });
 
+        // Check if browser supports sharing files natively (Mobile/Modern Browsers)
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          try {
+            await navigator.share({
+              title: 'Snake High Score Challenge',
+              text: shareMessage,
+              url: gameUrl,
+              files: [file]
+            });
+          } catch (e) {
+            // User canceled share sheet
+          }
+        } else {
+          // Fallback for desktop/unsupported browsers: Download image & copy message
+          const link = document.createElement('a');
+          link.download = `snake-highscore-${highScore}.png`;
+          link.href = cardCanvas.toDataURL('image/png');
+          link.click();
+
+          navigator.clipboard.writeText(shareMessage).then(() => {
+            const originalText = shareBtn.textContent;
+            shareBtn.textContent = 'Card Saved & Link Copied! 📋';
+            setTimeout(() => {
+              shareBtn.textContent = originalText;
+            }, 3000);
+          });
+        }
+      }, 'image/png');
+    }
+    
     function setDifficulty(diff) {
       selectedDifficulty = diff;
       document.querySelectorAll('#menu-settings .option-selector')[0]
