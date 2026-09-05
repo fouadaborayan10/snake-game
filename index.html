@@ -29,7 +29,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       width: 100%;
       max-width: 420px;
       padding: 12px;
@@ -66,6 +66,129 @@
       display: block;
     }
 
+    /* Achievements Bar Styling (Hidden by Default for Home Screen) */
+    .achievements-container {
+      display: none;
+      justify-content: space-between;
+      gap: 6px;
+      width: 100%;
+    }
+
+    .achievements-container.active {
+      display: flex;
+    }
+
+    .achievement-badge {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 2px;
+      background: #14141c;
+      border: 1px solid #222230;
+      border-radius: 8px;
+      opacity: 0.25;
+      filter: grayscale(100%);
+      transition: all 0.4s ease;
+    }
+
+    .achievement-badge .badge-icon {
+      font-size: 14px;
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+
+    .achievement-badge .badge-name {
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: #808090;
+    }
+
+    /* Unlocked States */
+    .achievement-badge.unlocked {
+      opacity: 1;
+      filter: grayscale(0%);
+      border-color: currentColor;
+    }
+
+    .achievement-badge.bronze.unlocked { color: #cd7f32; border-color: #cd7f32; }
+    .achievement-badge.silver.unlocked { color: #c0c0c0; border-color: #c0c0c0; }
+    .achievement-badge.gold.unlocked { color: #ffd700; border-color: #ffd700; }
+    .achievement-badge.platinum.unlocked { color: #e5e4e2; border-color: #e5e4e2; }
+    .achievement-badge.titanium.unlocked { color: #87ceeb; border-color: #87ceeb; }
+
+    .achievement-badge.bronze.unlocked .badge-name { color: #cd7f32; }
+    .achievement-badge.silver.unlocked .badge-name { color: #c0c0c0; }
+    .achievement-badge.gold.unlocked .badge-name { color: #ffd700; }
+    .achievement-badge.platinum.unlocked .badge-name { color: #e5e4e2; }
+    .achievement-badge.titanium.unlocked .badge-name { color: #87ceeb; }
+
+    /* 3-Second Glowing Unlock Animation */
+    .achievement-badge.glowing {
+      animation: unlockGlow 3s ease-in-out forwards;
+    }
+
+    @keyframes unlockGlow {
+      0% {
+        transform: scale(1);
+        box-shadow: 0 0 0px currentColor;
+      }
+      20% {
+        transform: scale(1.15);
+        box-shadow: 0 0 20px currentColor;
+        filter: brightness(1.5) grayscale(0%);
+      }
+      80% {
+        transform: scale(1.05);
+        box-shadow: 0 0 16px currentColor;
+        filter: brightness(1.3) grayscale(0%);
+      }
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 0px transparent;
+      }
+    }
+
+    /* Combo Gauge and Display (Outside Canvas) */
+    .combo-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      width: 100%;
+      height: 38px;
+    }
+
+    .combo-gauge-container {
+      width: 100%;
+      height: 6px;
+      background: #20202c;
+      border-radius: 3px;
+      overflow: hidden;
+      border: 1px solid #2c2c3e;
+    }
+
+    .combo-gauge-bar {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #ffeb3b, #ff9800);
+      box-shadow: 0 0 8px #ffeb3b;
+      transition: width 0.05s linear;
+    }
+
+    .combo-text-display {
+      font-size: 15px;
+      font-weight: 900;
+      color: #ffeb3b;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-shadow: 0 0 8px rgba(255, 235, 59, 0.6);
+      min-height: 20px;
+    }
+
     .overlay {
       position: absolute;
       inset: 0;
@@ -74,7 +197,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: 16px;
+      gap: 12px;
       backdrop-filter: blur(6px);
       transition: opacity 0.3s ease;
       z-index: 10;
@@ -103,10 +226,25 @@
       100% { filter: drop-shadow(0 0 12px rgba(76, 175, 80, 0.8)); }
     }
 
+    .home-highscore-badge {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #a0a0a0;
+      background: #20202c;
+      padding: 6px 16px;
+      border-radius: 20px;
+      border: 1px solid #2c2c3e;
+    }
+
+    .home-highscore-badge span {
+      color: #ffeb3b;
+    }
+
     .menu-group {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
       width: 100%;
       max-width: 260px;
     }
@@ -150,7 +288,7 @@
     .action-btn-group {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
       width: 100%;
       max-width: 260px;
     }
@@ -176,6 +314,13 @@
       color: #a0a0a0;
       box-shadow: none;
       border: 1px solid #2c2c3e;
+    }
+
+    .action-btn.share-btn {
+      background: #20202c;
+      color: #ffeb3b;
+      border: 1px solid #ffeb3b;
+      box-shadow: 0 2px 10px rgba(255, 235, 59, 0.15);
     }
 
     .action-btn:active {
@@ -226,11 +371,38 @@
       <div>BEST: <span id="high-score">0</span></div>
     </div>
 
+    <div id="achievements-bar" class="achievements-container">
+      <div id="ach-bronze" class="achievement-badge bronze">
+        <span class="badge-icon">🥉</span>
+        <span class="badge-name">Bronze</span>
+      </div>
+      <div id="ach-silver" class="achievement-badge silver">
+        <span class="badge-icon">🥈</span>
+        <span class="badge-name">Silver</span>
+      </div>
+      <div id="ach-gold" class="achievement-badge gold">
+        <span class="badge-icon">🥇</span>
+        <span class="badge-name">Gold</span>
+      </div>
+      <div id="ach-platinum" class="achievement-badge platinum">
+        <span class="badge-icon">💎</span>
+        <span class="badge-name">Plat</span>
+      </div>
+      <div id="ach-titanium" class="achievement-badge titanium">
+        <span class="badge-icon">🛡️</span>
+        <span class="badge-name">Titan</span>
+      </div>
+    </div>
+
     <div class="canvas-wrapper">
       <canvas id="gameCanvas" width="400" height="400"></canvas>
       <div id="overlay" class="overlay">
         <h1 class="typography-title" id="overlay-title">SNAKE</h1>
         
+        <div class="home-highscore-badge" id="home-highscore-container">
+          BEST SCORE: <span id="home-high-score">0</span>
+        </div>
+
         <div class="menu-group" id="menu-settings">
           <div>
             <div class="setting-label">Difficulty</div>
@@ -251,9 +423,17 @@
 
         <div class="action-btn-group">
           <button class="action-btn" id="start-btn" onclick="handlePrimaryAction()">Start Game</button>
+          <button class="action-btn share-btn" id="share-btn" onclick="generateShareCard()">Share High Score 📸</button>
           <button class="action-btn secondary" id="home-btn" style="display: none;" onclick="returnToHome()">Home Screen</button>
         </div>
       </div>
+    </div>
+
+    <div class="combo-wrapper">
+      <div class="combo-gauge-container">
+        <div id="combo-gauge" class="combo-gauge-bar"></div>
+      </div>
+      <div id="combo-display" class="combo-text-display"></div>
     </div>
 
     <div class="controls">
@@ -269,11 +449,16 @@
     const ctx = canvas.getContext('2d');
     const scoreEl = document.getElementById('score');
     const highScoreEl = document.getElementById('high-score');
+    const homeHighScoreEl = document.getElementById('home-high-score');
     const overlay = document.getElementById('overlay');
     const overlayTitle = document.getElementById('overlay-title');
     const startBtn = document.getElementById('start-btn');
+    const shareBtn = document.getElementById('share-btn');
     const homeBtn = document.getElementById('home-btn');
     const menuSettings = document.getElementById('menu-settings');
+    const comboDisplay = document.getElementById('combo-display');
+    const comboGauge = document.getElementById('combo-gauge');
+    const achievementsBar = document.getElementById('achievements-bar');
 
     const GRID_SIZE = 20;
     const TILE_COUNT = canvas.width / GRID_SIZE;
@@ -300,11 +485,19 @@
     let isRunning = false;
     let isPaused = false;
 
-    // Combo system
+    // Achievement Definitions
+    const achievements = {
+      bronze: { score: 500, label: 'Bronze 🥉', unlocked: false, el: document.getElementById('ach-bronze') },
+      silver: { score: 1000, label: 'Silver 🥈', unlocked: false, el: document.getElementById('ach-silver') },
+      gold: { score: 1500, label: 'Gold 🥇', unlocked: false, el: document.getElementById('ach-gold') },
+      platinum: { score: 2000, label: 'Platinum 💎', unlocked: false, el: document.getElementById('ach-platinum') },
+      titanium: { score: 3000, label: 'Titanium 🛡️', unlocked: false, el: document.getElementById('ach-titanium') }
+    };
+
+    // Combo System
     let lastEatTime = 0;
     let comboCount = 0;
-    let comboText = null;
-    let comboTextTimer = null;
+    const COMBO_WINDOW = 3000;
 
     // Intro state
     let isIntro = true;
@@ -316,7 +509,127 @@
     let isBlinking = false;
     let blinkTimer = null;
 
-    highScoreEl.textContent = highScore;
+    updateHighScoreUI();
+
+    function updateHighScoreUI() {
+      highScoreEl.textContent = highScore;
+      homeHighScoreEl.textContent = highScore;
+    }
+
+    function resetAchievements() {
+      Object.keys(achievements).forEach(key => {
+        const ach = achievements[key];
+        ach.unlocked = false;
+        ach.el.classList.remove('unlocked', 'glowing');
+      });
+    }
+
+    function checkAchievements(currentScore) {
+      Object.keys(achievements).forEach(key => {
+        const ach = achievements[key];
+        if (!ach.unlocked && currentScore >= ach.score) {
+          ach.unlocked = true;
+          ach.el.classList.add('unlocked', 'glowing');
+          
+          setTimeout(() => {
+            ach.el.classList.remove('glowing');
+          }, 3000);
+        }
+      });
+    }
+
+    async function generateShareCard() {
+      const cardCanvas = document.createElement('canvas');
+      cardCanvas.width = 600;
+      cardCanvas.height = 350;
+      const cctx = cardCanvas.getContext('2d');
+
+      // Background Gradient
+      const grad = cctx.createLinearGradient(0, 0, 600, 350);
+      grad.addColorStop(0, '#0d0d11');
+      grad.addColorStop(1, '#161622');
+      cctx.fillStyle = grad;
+      cctx.fillRect(0, 0, 600, 350);
+
+      // Card Border
+      cctx.strokeStyle = '#2c2c3e';
+      cctx.lineWidth = 6;
+      cctx.strokeRect(3, 3, 594, 344);
+
+      // Inner Accent Glow Border
+      cctx.strokeStyle = '#4caf50';
+      cctx.lineWidth = 2;
+      cctx.strokeRect(12, 12, 576, 326);
+
+      // Title
+      cctx.font = '900 36px sans-serif';
+      cctx.fillStyle = '#4caf50';
+      cctx.textAlign = 'center';
+      cctx.fillText('SNAKE HIGH SCORE', 300, 65);
+
+      // High Score Value
+      cctx.font = '900 68px sans-serif';
+      cctx.fillStyle = '#ffeb3b';
+      cctx.fillText(highScore, 300, 150);
+
+      cctx.font = '600 16px sans-serif';
+      cctx.fillStyle = '#a0a0a0';
+      cctx.fillText(`DIFFICULTY: ${selectedDifficulty.toUpperCase()}  |  WALLS: ${hasWalls ? 'ON' : 'OFF'}`, 300, 185);
+
+      // Achievements Section
+      cctx.font = '700 15px sans-serif';
+      cctx.fillStyle = '#808090';
+      cctx.fillText('ACHIEVEMENTS UNLOCKED', 300, 230);
+
+      let unlockedBadges = Object.keys(achievements)
+        .filter(k => highScore >= achievements[k].score)
+        .map(k => achievements[k].label);
+
+      cctx.font = '700 18px sans-serif';
+      cctx.fillStyle = '#ffffff';
+      if (unlockedBadges.length > 0) {
+        cctx.fillText(unlockedBadges.join('   '), 300, 262);
+      } else {
+        cctx.fillStyle = '#505060';
+        cctx.fillText('None Yet', 300, 262);
+      }
+
+      // Footer Call to Action
+      cctx.font = '600 14px sans-serif';
+      cctx.fillStyle = '#4caf50';
+      cctx.fillText('Can you beat my score?', 300, 312);
+
+      // 1. Download Card Image
+      const link = document.createElement('a');
+      link.download = `snake-highscore-${highScore}.png`;
+      link.href = cardCanvas.toDataURL('image/png');
+      link.click();
+
+      // 2. Share Text & Link
+      const gameUrl = window.location.href;
+      const shareMessage = `🐍 I just set a high score of ${highScore} points in Snake! Can you beat my score? Play here: ${gameUrl}`;
+
+      // Try Native Mobile/Desktop Share Sheet, Fallback to Clipboard
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: 'Snake High Score Challenge',
+            text: shareMessage,
+            url: gameUrl
+          });
+        } catch (e) {
+          // Share dismissed by user
+        }
+      } else {
+        navigator.clipboard.writeText(shareMessage).then(() => {
+          const originalText = shareBtn.textContent;
+          shareBtn.textContent = 'Image Saved & Link Copied! 📋';
+          setTimeout(() => {
+            shareBtn.textContent = originalText;
+          }, 3000);
+        });
+      }
+    }
 
     function setDifficulty(diff) {
       selectedDifficulty = diff;
@@ -367,8 +680,9 @@
       score = 0;
       ateCount = 0;
       comboCount = 0;
-      comboText = null;
       lastEatTime = performance.now();
+      resetComboUI();
+      resetAchievements();
       isPaused = false;
       clearBonusFood();
       clearBlink();
@@ -420,12 +734,22 @@
       clearTimeout(blinkTimer);
     }
 
-    function triggerComboText(text) {
-      comboText = text;
-      clearTimeout(comboTextTimer);
-      comboTextTimer = setTimeout(() => {
-        comboText = null;
-      }, 1000);
+    function resetComboUI() {
+      comboDisplay.textContent = "";
+      comboGauge.style.width = "0%";
+    }
+
+    function updateComboGauge() {
+      if (!isRunning || isPaused || lastEatTime === 0) return;
+      const elapsed = performance.now() - lastEatTime;
+      const remainingRatio = Math.max(0, (COMBO_WINDOW - elapsed) / COMBO_WINDOW);
+
+      if (remainingRatio > 0) {
+        comboGauge.style.width = `${remainingRatio * 100}%`;
+      } else {
+        resetComboUI();
+        comboCount = 0;
+      }
     }
 
     function handlePrimaryAction() {
@@ -440,6 +764,7 @@
       isIntro = false;
       initGame();
       isRunning = true;
+      achievementsBar.classList.add('active'); // Show during active gameplay
       overlay.classList.add('hidden');
       lastStepTime = performance.now();
       requestAnimationFrame(gameLoop);
@@ -448,10 +773,14 @@
     function returnToHome() {
       isRunning = false;
       isPaused = false;
+      achievementsBar.classList.remove('active'); // Hide on home screen
+      resetComboUI();
       overlayTitle.textContent = "SNAKE";
       menuSettings.style.display = "flex";
+      shareBtn.style.display = "block";
       startBtn.textContent = "Start Game";
       homeBtn.style.display = "none";
+      updateHighScoreUI();
       overlay.classList.remove('hidden');
       initIntro();
     }
@@ -461,12 +790,15 @@
       isPaused = !isPaused;
 
       if (isPaused) {
+        achievementsBar.classList.remove('active'); // Hide during pause screen
         overlayTitle.textContent = "PAUSED";
         menuSettings.style.display = "none";
+        shareBtn.style.display = "none";
         startBtn.textContent = "RESUME";
         homeBtn.style.display = "block";
         overlay.classList.remove('hidden');
       } else {
+        achievementsBar.classList.add('active'); // Show upon resuming gameplay
         overlay.classList.add('hidden');
         lastStepTime = performance.now();
         requestAnimationFrame(gameLoop);
@@ -476,17 +808,20 @@
     function gameOver() {
       isRunning = false;
       isPaused = false;
+      achievementsBar.classList.remove('active'); // Hide on game over screen
       clearBonusFood();
       clearBlink();
+      resetComboUI();
 
       if (score > highScore) {
         highScore = score;
         localStorage.setItem('snake_high_score', highScore);
-        highScoreEl.textContent = highScore;
+        updateHighScoreUI();
       }
 
       overlayTitle.textContent = "GAME OVER";
       menuSettings.style.display = "none";
+      shareBtn.style.display = "block";
       startBtn.textContent = "RESTART";
       homeBtn.style.display = "block";
       overlay.classList.remove('hidden');
@@ -549,21 +884,24 @@
 
     function processEating(isBonus = false) {
       const now = performance.now();
-      const timeDiff = (now - lastEatTime) / 1000;
+      const timeDiff = now - lastEatTime;
       lastEatTime = now;
 
       let multiplier = 1;
-      if (timeDiff < 3.0) {
+      if (timeDiff < COMBO_WINDOW) {
         comboCount++;
         multiplier = 1 + comboCount * 0.5;
-        triggerComboText(`COMBO x${multiplier.toFixed(1)}!`);
+        comboDisplay.textContent = `COMBO x${multiplier.toFixed(1)}!`;
       } else {
         comboCount = 0;
+        resetComboUI();
       }
 
       const points = Math.round((isBonus ? baseScoreValue * 2 : baseScoreValue) * multiplier);
       score += points;
       scoreEl.textContent = score;
+
+      checkAchievements(score);
     }
 
     function updateLogic() {
@@ -715,17 +1053,6 @@
         }
       }
       ctx.shadowBlur = 0;
-
-      // Draw Combo Popup Text
-      if (comboText) {
-        ctx.fillStyle = '#ffeb3b';
-        ctx.shadowColor = '#ffeb3b';
-        ctx.shadowBlur = 10;
-        ctx.font = '900 18px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-        ctx.textAlign = 'center';
-        ctx.fillText(comboText, canvas.width / 2, 36);
-        ctx.shadowBlur = 0;
-      }
     }
 
     function gameLoop(timestamp) {
@@ -740,6 +1067,7 @@
       let progress = Math.min((timestamp - lastStepTime) / stepInterval, 1);
       
       if (isRunning && !isPaused) {
+        updateComboGauge();
         draw(progress);
         requestAnimationFrame(gameLoop);
       }
