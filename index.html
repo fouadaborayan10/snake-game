@@ -600,13 +600,12 @@
       cctx.fillText('Can you beat my score?', 300, 312);
 
       const gameUrl = window.location.href;
-      // Plain message without the URL embedded inside text to prevent duplicate link output
+      // Plain message without URL or "Play here:" to avoid double links on mobile OS share sheets
       const shareText = `🐍 I just set a high score of ${highScore} points in Snake! Can you beat my score?`;
 
       cardCanvas.toBlob(async (blob) => {
         const file = new File([blob], `snake-highscore-${highScore}.png`, { type: 'image/png' });
 
-        // Check Native File Sharing Capability
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
           try {
             await navigator.share({
@@ -616,10 +615,10 @@
               files: [file]
             });
           } catch (e) {
-            // User closed share sheet
+            // User canceled share sheet
           }
         } else {
-          // Fallback: Trigger PNG download and copy formatted link text to clipboard
+          // Fallback for desktop/unsupported browsers
           const link = document.createElement('a');
           link.download = `snake-highscore-${highScore}.png`;
           link.href = cardCanvas.toDataURL('image/png');
