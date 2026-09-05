@@ -538,7 +538,7 @@
       });
     }
 
-async function generateShareCard() {
+    async function generateShareCard() {
       const cardCanvas = document.createElement('canvas');
       cardCanvas.width = 600;
       cardCanvas.height = 350;
@@ -600,32 +600,33 @@ async function generateShareCard() {
       cctx.fillText('Can you beat my score?', 300, 312);
 
       const gameUrl = window.location.href;
-      const shareMessage = `🐍 I just set a high score of ${highScore} points in Snake! Can you beat my score? Play here: ${gameUrl}`;
+      // Plain message without the URL embedded inside text to prevent duplicate link output
+      const shareText = `🐍 I just set a high score of ${highScore} points in Snake! Can you beat my score?`;
 
-      // Convert canvas drawing to an Image File for Web Share API
       cardCanvas.toBlob(async (blob) => {
         const file = new File([blob], `snake-highscore-${highScore}.png`, { type: 'image/png' });
 
-        // Check if browser supports sharing files natively (Mobile/Modern Browsers)
+        // Check Native File Sharing Capability
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
           try {
             await navigator.share({
               title: 'Snake High Score Challenge',
-              text: shareMessage,
+              text: shareText,
               url: gameUrl,
               files: [file]
             });
           } catch (e) {
-            // User canceled share sheet
+            // User closed share sheet
           }
         } else {
-          // Fallback for desktop/unsupported browsers: Download image & copy message
+          // Fallback: Trigger PNG download and copy formatted link text to clipboard
           const link = document.createElement('a');
           link.download = `snake-highscore-${highScore}.png`;
           link.href = cardCanvas.toDataURL('image/png');
           link.click();
 
-          navigator.clipboard.writeText(shareMessage).then(() => {
+          const fallbackCopyText = `${shareText} Play here: ${gameUrl}`;
+          navigator.clipboard.writeText(fallbackCopyText).then(() => {
             const originalText = shareBtn.textContent;
             shareBtn.textContent = 'Card Saved & Link Copied! 📋';
             setTimeout(() => {
@@ -635,7 +636,7 @@ async function generateShareCard() {
         }
       }, 'image/png');
     }
-    
+
     function setDifficulty(diff) {
       selectedDifficulty = diff;
       document.querySelectorAll('#menu-settings .option-selector')[0]
