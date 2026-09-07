@@ -14,7 +14,7 @@
       --text-main: #f0f4fc;
       --text-sub: #8d9bb0;
       --text-label: #5e6d8a;
-      --overlay-bg: rgba(11, 13, 20, 0.94);
+      --overlay-bg: rgba(11, 13, 20, 0.95);
       --grid-line: #161c2e;
       --accent-green: #00e676;
       --accent-gold: #ffd700;
@@ -31,7 +31,7 @@
       --text-main: #101828;
       --text-sub: #475467;
       --text-label: #667085;
-      --overlay-bg: rgba(244, 246, 251, 0.94);
+      --overlay-bg: rgba(244, 246, 251, 0.95);
       --grid-line: #e4e9f2;
       --accent-green: #00a854;
       --accent-turbo: #d81b60;
@@ -53,8 +53,11 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
+      min-height: 100dvh;
+      height: 100dvh;
       overflow: hidden;
+      overscroll-behavior: none;
+      -webkit-touch-callout: none;
       transition: background-color 0.3s ease, color 0.3s ease;
     }
 
@@ -62,10 +65,11 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
+      gap: 6px;
       width: 100%;
       max-width: 440px;
-      padding: 12px 14px;
+      padding: 6px 12px;
+      max-height: 100dvh;
     }
 
     .score-board {
@@ -73,12 +77,12 @@
       justify-content: space-between;
       align-items: center;
       width: 100%;
-      padding: 8px 14px;
+      padding: 7px 12px;
       background: var(--panel-bg);
       backdrop-filter: blur(8px);
       border: 1px solid var(--border-color);
       border-radius: 12px;
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 700;
       letter-spacing: 0.5px;
       color: var(--text-sub);
@@ -86,7 +90,7 @@
 
     .score-board span {
       color: var(--accent-green);
-      font-size: 15px;
+      font-size: 14px;
     }
 
     .coin-badge {
@@ -96,17 +100,17 @@
 
     .audio-controls {
       display: flex;
-      gap: 6px;
+      gap: 5px;
       align-items: center;
     }
 
     .audio-btn {
       background: transparent;
       border: 1px solid var(--border-color);
-      font-size: 14px;
+      font-size: 13px;
       cursor: pointer;
       line-height: 1;
-      padding: 5px 7px;
+      padding: 4px 6px;
       border-radius: 8px;
       color: var(--text-main);
       transition: all 0.15s ease;
@@ -124,9 +128,9 @@
     .achievements-container {
       display: flex;
       justify-content: space-between;
-      gap: 6px;
+      gap: 5px;
       width: 100%;
-      padding: 4px 2px;
+      padding: 2px 1px;
     }
 
     .achievement-badge {
@@ -135,10 +139,10 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 6px 2px 5px;
+      padding: 5px 2px 4px;
       background: var(--panel-bg);
       border: 1px solid var(--border-color);
-      border-radius: 12px;
+      border-radius: 10px;
       opacity: 0.38;
       filter: grayscale(90%);
       transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -148,18 +152,18 @@
     }
 
     .badge-shape-wrap {
-      width: 38px;
-      height: 38px;
+      width: 34px;
+      height: 34px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 3px;
+      margin-bottom: 2px;
       position: relative;
     }
 
     .badge-shape {
-      width: 32px;
-      height: 32px;
+      width: 28px;
+      height: 28px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -170,20 +174,18 @@
     }
 
     .badge-shape .badge-icon {
-      font-size: 14px;
+      font-size: 13px;
       line-height: 1;
       z-index: 2;
       transition: transform 0.25s ease;
     }
 
     /* Distinct Shapes per tier */
-    /* Bronze: Embossed Roman Medallion (Circular Coin) */
     .achievement-badge.bronze .badge-shape {
       border-radius: 50%;
       box-shadow: inset 0 0 0 2px rgba(205, 127, 50, 0.3);
     }
 
-    /* Silver: Medieval Knight Crest Shield */
     .achievement-badge.silver .badge-shape {
       clip-path: polygon(50% 0%, 100% 16%, 100% 66%, 50% 100%, 0% 66%, 0% 16%);
       border-radius: 0;
@@ -191,7 +193,6 @@
       background: #252e42;
     }
 
-    /* Gold: Regal Octagonal Champion Medallion */
     .achievement-badge.gold .badge-shape {
       clip-path: polygon(29% 0%, 71% 0%, 100% 29%, 100% 71%, 71% 100%, 29% 100%, 0% 71%, 0% 29%);
       border-radius: 0;
@@ -199,7 +200,6 @@
       background: #2b2a1a;
     }
 
-    /* Platinum: Prismatic Faceted Diamond Cut */
     .achievement-badge.platinum .badge-shape {
       clip-path: polygon(50% 0%, 100% 36%, 76% 100%, 24% 100%, 0% 36%);
       border-radius: 0;
@@ -207,7 +207,6 @@
       background: #192a3b;
     }
 
-    /* Titanium: Futuristic Armored Mecha Aegis Hexagon */
     .achievement-badge.titanium .badge-shape {
       clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
       border-radius: 0;
@@ -216,23 +215,22 @@
     }
 
     .achievement-badge .badge-name {
-      font-size: 8px;
+      font-size: 7.5px;
       font-weight: 900;
-      letter-spacing: 0.6px;
+      letter-spacing: 0.5px;
       text-transform: uppercase;
       color: var(--text-label);
       line-height: 1.1;
     }
 
     .achievement-badge .badge-score {
-      font-size: 7.5px;
+      font-size: 7px;
       font-weight: 800;
       color: var(--text-sub);
       opacity: 0.75;
       font-family: monospace;
     }
 
-    /* Unlocked states with rich metallic gradients and multi-layer illumination */
     .achievement-badge.unlocked {
       opacity: 1;
       filter: grayscale(0%);
@@ -240,10 +238,9 @@
     }
 
     .achievement-badge.unlocked .badge-icon {
-      transform: scale(1.18);
+      transform: scale(1.15);
     }
 
-    /* Bronze Unlocked */
     .achievement-badge.bronze.unlocked {
       border-color: #cd7f32;
       background: linear-gradient(160deg, rgba(205, 127, 50, 0.25) 0%, rgba(22, 27, 42, 0.85) 100%);
@@ -256,7 +253,6 @@
     }
     .achievement-badge.bronze.unlocked .badge-name { color: #f59e5b; }
 
-    /* Silver Unlocked */
     .achievement-badge.silver.unlocked {
       border-color: #cbd5e1;
       background: linear-gradient(160deg, rgba(203, 213, 225, 0.28) 0%, rgba(22, 27, 42, 0.85) 100%);
@@ -268,7 +264,6 @@
     }
     .achievement-badge.silver.unlocked .badge-name { color: #e2e8f0; }
 
-    /* Gold Unlocked */
     .achievement-badge.gold.unlocked {
       border-color: #ffd700;
       background: linear-gradient(160deg, rgba(255, 215, 0, 0.28) 0%, rgba(22, 27, 42, 0.85) 100%);
@@ -280,7 +275,6 @@
     }
     .achievement-badge.gold.unlocked .badge-name { color: #ffd700; }
 
-    /* Platinum Unlocked */
     .achievement-badge.platinum.unlocked {
       border-color: #38bdf8;
       background: linear-gradient(160deg, rgba(56, 189, 248, 0.3) 0%, rgba(22, 27, 42, 0.85) 100%);
@@ -292,7 +286,6 @@
     }
     .achievement-badge.platinum.unlocked .badge-name { color: #38bdf8; }
 
-    /* Titanium Unlocked */
     .achievement-badge.titanium.unlocked {
       border-color: #c084fc;
       background: linear-gradient(160deg, rgba(168, 85, 247, 0.35) 0%, rgba(22, 27, 42, 0.85) 100%);
@@ -314,11 +307,11 @@
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 4px;
-      padding: 6px 12px;
+      gap: 3px;
+      padding: 5px 10px;
       background: var(--panel-bg);
       border: 1px solid var(--border-color);
-      border-radius: 12px;
+      border-radius: 10px;
       backdrop-filter: blur(8px);
     }
 
@@ -326,9 +319,9 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 10px;
+      font-size: 9.5px;
       font-weight: 800;
-      letter-spacing: 1px;
+      letter-spacing: 0.8px;
       text-transform: uppercase;
     }
 
@@ -340,7 +333,7 @@
     }
 
     .turbo-status {
-      font-size: 10px;
+      font-size: 9.5px;
       font-weight: 900;
       color: var(--text-sub);
       transition: color 0.2s ease;
@@ -365,9 +358,9 @@
 
     .turbo-gauge-track {
       width: 100%;
-      height: 8px;
+      height: 7px;
       background: rgba(0, 0, 0, 0.35);
-      border-radius: 6px;
+      border-radius: 5px;
       border: 1px solid var(--border-color);
       overflow: hidden;
       position: relative;
@@ -402,6 +395,7 @@
       overflow: hidden;
       border: 2px solid var(--border-color);
       transition: transform 0.05s ease-out;
+      touch-action: none;
     }
 
     .canvas-wrapper.shake {
@@ -425,14 +419,14 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 3px;
+      gap: 2px;
       width: 100%;
-      height: 34px;
+      height: 28px;
     }
 
     .combo-gauge-container {
       width: 100%;
-      height: 5px;
+      height: 4px;
       background: var(--panel-bg);
       border-radius: 4px;
       overflow: hidden;
@@ -448,13 +442,13 @@
     }
 
     .combo-text-display {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 900;
       color: #00e676;
-      letter-spacing: 1.5px;
+      letter-spacing: 1.2px;
       text-transform: uppercase;
-      text-shadow: 0 0 12px rgba(0, 230, 118, 0.8);
-      min-height: 18px;
+      text-shadow: 0 0 10px rgba(0, 230, 118, 0.8);
+      min-height: 16px;
       display: inline-block;
     }
 
@@ -464,26 +458,26 @@
 
     @keyframes comboPulse {
       0% { transform: scale(1); }
-      100% { transform: scale(1.2); text-shadow: 0 0 18px rgba(0, 230, 118, 1); }
+      100% { transform: scale(1.15); text-shadow: 0 0 16px rgba(0, 230, 118, 1); }
     }
 
     .powerup-bar-container {
       display: flex;
-      gap: 8px;
+      gap: 6px;
       width: 100%;
-      min-height: 26px;
+      min-height: 24px;
       justify-content: center;
     }
 
     .powerup-active-badge {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       background: var(--panel-bg);
       border: 1px solid var(--border-accent);
-      padding: 3px 10px;
-      border-radius: 12px;
-      font-size: 10.5px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 10px;
       font-weight: 800;
       color: var(--text-main);
       backdrop-filter: blur(6px);
@@ -500,15 +494,16 @@
       background: var(--overlay-bg);
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       backdrop-filter: blur(8px);
       transition: opacity 0.3s ease;
       z-index: 10;
-      padding: 16px;
+      padding: 14px 12px;
       text-align: center;
       overflow-y: auto;
+      overflow-x: hidden;
     }
 
     .overlay.hidden {
@@ -517,27 +512,30 @@
     }
 
     .typography-title {
-      font-size: clamp(24px, 7vw, 34px);
+      font-size: clamp(22px, 6vw, 30px);
       font-weight: 900;
-      letter-spacing: 3px;
-      line-height: 1.2;
-      padding: 2px 0;
+      letter-spacing: 2px;
+      line-height: 1.3;
+      padding: 6px 12px;
       background: linear-gradient(135deg, #00e676, #00e5ff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       text-transform: uppercase;
-      filter: drop-shadow(0 0 10px rgba(0, 230, 118, 0.4));
+      filter: drop-shadow(0 0 12px rgba(0, 230, 118, 0.45));
       margin: 0;
+      flex-shrink: 0;
+      display: inline-block;
+      box-sizing: border-box;
     }
 
     .home-highscore-badge {
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 800;
       letter-spacing: 1px;
       color: var(--text-sub);
       background: var(--panel-bg);
-      padding: 3px 10px;
-      border-radius: 20px;
+      padding: 2px 8px;
+      border-radius: 16px;
       border: 1px solid var(--border-accent);
     }
 
@@ -548,15 +546,15 @@
     .menu-group {
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 5px;
       width: 100%;
       max-width: 260px;
     }
 
     .setting-label {
-      font-size: 9px;
+      font-size: 8.5px;
       text-transform: uppercase;
-      letter-spacing: 1.5px;
+      letter-spacing: 1.2px;
       color: var(--text-label);
       margin-bottom: 2px;
       text-align: left;
@@ -566,21 +564,21 @@
     .option-selector {
       display: flex;
       background: var(--panel-bg);
-      border-radius: 10px;
-      padding: 3px;
-      gap: 4px;
+      border-radius: 8px;
+      padding: 2px;
+      gap: 3px;
       border: 1px solid var(--border-color);
     }
 
     .option-btn {
       flex: 1;
-      padding: 5px 0;
-      font-size: 11px;
+      padding: 4px 0;
+      font-size: 10.5px;
       font-weight: 700;
       border: none;
       background: transparent;
       color: var(--text-sub);
-      border-radius: 8px;
+      border-radius: 6px;
       cursor: pointer;
       transition: all 0.2s ease;
     }
@@ -588,56 +586,267 @@
     .option-btn.active {
       background: var(--accent-green);
       color: #fff;
-      box-shadow: 0 2px 10px rgba(0, 230, 118, 0.3);
+      box-shadow: 0 2px 8px rgba(0, 230, 118, 0.3);
     }
 
     .action-btn-group {
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 7px;
       width: 100%;
-      max-width: 260px;
+      max-width: 280px;
       margin-top: 4px;
     }
 
     .action-btn {
-      padding: 9px;
+      position: relative;
+      padding: 9.5px 14px;
       width: 100%;
       font-size: 11.5px;
       font-weight: 800;
-      letter-spacing: 1.5px;
+      letter-spacing: 1.3px;
       text-transform: uppercase;
       background: var(--accent-green);
       color: #0b0d14;
       border: none;
       border-radius: 10px;
       cursor: pointer;
-      box-shadow: 0 4px 16px rgba(0, 230, 118, 0.3);
-      transition: transform 0.1s, filter 0.2s;
+      box-shadow: 0 3px 12px rgba(0, 230, 118, 0.25);
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, filter 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .action-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 230, 118, 0.45);
+      filter: brightness(1.08);
+    }
+
+    .action-btn:active {
+      transform: translateY(1px) scale(0.98);
+      box-shadow: 0 2px 8px rgba(0, 230, 118, 0.3);
     }
 
     .action-btn.secondary {
       background: var(--panel-bg);
       color: var(--text-sub);
-      box-shadow: none;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
       border: 1px solid var(--border-accent);
+    }
+
+    .action-btn.secondary:hover {
+      background: rgba(32, 42, 66, 0.95);
+      border-color: var(--accent-cyan);
+      color: #ffffff;
+      box-shadow: 0 6px 18px rgba(0, 229, 255, 0.25);
+      transform: translateY(-2px);
+      filter: none;
+    }
+
+    [data-theme="light"] .action-btn.secondary:hover {
+      background: #eef3fb;
+      color: #101828;
+      border-color: var(--accent-green);
+      box-shadow: 0 5px 16px rgba(0, 168, 84, 0.2);
     }
 
     .action-btn.shop-btn {
       background: #ff9800;
       color: #fff;
-      box-shadow: 0 4px 16px rgba(255, 152, 0, 0.3);
+      box-shadow: 0 3px 12px rgba(255, 152, 0, 0.25);
+    }
+
+    .action-btn.shop-btn:hover {
+      background: #ffa726;
+      box-shadow: 0 6px 20px rgba(255, 152, 0, 0.5);
+      filter: brightness(1.08);
+      transform: translateY(-2px);
     }
 
     .action-btn.share-btn {
       background: var(--panel-bg);
       color: var(--accent-gold);
       border: 1px solid var(--accent-gold);
-      box-shadow: 0 2px 10px rgba(255, 215, 0, 0.15);
+      box-shadow: 0 2px 8px rgba(255, 215, 0, 0.15);
     }
 
-    .action-btn:active {
-      transform: scale(0.97);
+    .action-btn.share-btn:hover {
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.22), rgba(255, 152, 0, 0.15));
+      border-color: #ffe066;
+      color: #ffffff;
+      box-shadow: 0 6px 20px rgba(255, 215, 0, 0.35);
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+      transform: translateY(-2px);
+      filter: none;
+    }
+
+    /* Unified Settings Modal Styling */
+    .settings-modal-content {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      max-width: 320px;
+      margin-top: 4px;
+    }
+
+    .settings-group-card {
+      background: var(--panel-bg);
+      border: 1px solid var(--border-accent);
+      border-radius: 12px;
+      padding: 9px 11px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .settings-group-title {
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--accent-cyan);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .setting-row {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .sound-settings-content {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+      max-width: 320px;
+      margin-top: 4px;
+    }
+
+    .volume-control-card {
+      background: var(--panel-bg);
+      border: 1px solid var(--border-accent);
+      border-radius: 12px;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .volume-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .volume-title-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-main);
+    }
+
+    .volume-badge {
+      font-size: 10px;
+      font-weight: 800;
+      font-family: monospace;
+      color: var(--accent-green);
+      background: rgba(0, 230, 118, 0.12);
+      border: 1px solid rgba(0, 230, 118, 0.3);
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
+
+    .slider-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .volume-slider {
+      flex: 1;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 7px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border-color);
+      border-radius: 5px;
+      outline: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .volume-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--accent-green);
+      box-shadow: 0 0 8px rgba(0, 230, 118, 0.7);
+      cursor: pointer;
+      transition: transform 0.1s ease;
+    }
+
+    .volume-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+    }
+
+    .volume-slider::-moz-range-thumb {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--accent-green);
+      border: none;
+      box-shadow: 0 0 8px rgba(0, 230, 118, 0.7);
+      cursor: pointer;
+    }
+
+    .quick-mute-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--border-accent);
+      border-radius: 7px;
+      padding: 3px 7px;
+      font-size: 12px;
+      cursor: pointer;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+    }
+
+    .quick-mute-btn:hover {
+      border-color: var(--accent-green);
+    }
+
+    .test-sfx-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--border-accent);
+      border-radius: 7px;
+      padding: 4px 8px;
+      font-size: 9.5px;
+      font-weight: 800;
+      color: var(--accent-cyan);
+      cursor: pointer;
+      align-self: flex-start;
+      transition: all 0.2s ease;
+    }
+
+    .test-sfx-btn:hover {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 8px rgba(0, 229, 255, 0.3);
     }
 
     .shop-modal {
@@ -647,7 +856,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 16px;
+      padding: 14px;
       z-index: 20;
       backdrop-filter: blur(10px);
       overflow-y: auto;
@@ -663,11 +872,11 @@
       align-items: center;
       width: 100%;
       max-width: 320px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .shop-title {
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 900;
       color: #ff9800;
       letter-spacing: 2px;
@@ -676,7 +885,7 @@
     .shop-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
+      gap: 8px;
       width: 100%;
       max-width: 320px;
     }
@@ -684,37 +893,37 @@
     .shop-item {
       background: var(--panel-bg);
       border: 2px solid var(--border-accent);
-      border-radius: 12px;
-      padding: 10px;
+      border-radius: 10px;
+      padding: 8px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
     }
 
     .shop-item.equipped {
       border-color: var(--accent-green);
-      box-shadow: 0 0 12px rgba(0, 230, 118, 0.3);
+      box-shadow: 0 0 10px rgba(0, 230, 118, 0.3);
     }
 
     .snake-preview {
-      width: 26px;
-      height: 26px;
-      border-radius: 8px;
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
 
     .shop-item-name {
-      font-size: 10.5px;
+      font-size: 10px;
       font-weight: 800;
       color: var(--text-main);
     }
 
     .shop-item-btn {
-      padding: 5px 8px;
-      font-size: 10px;
+      padding: 4px 6px;
+      font-size: 9.5px;
       font-weight: 800;
-      border-radius: 8px;
+      border-radius: 6px;
       border: none;
       cursor: pointer;
       width: 100%;
@@ -729,45 +938,45 @@
     .controls-guide-content {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
       width: 100%;
       max-width: 340px;
       text-align: left;
-      font-size: 11px;
+      font-size: 10.5px;
     }
 
     .guide-card {
       background: var(--panel-bg);
       border: 1px solid var(--border-accent);
-      border-radius: 12px;
-      padding: 10px 12px;
+      border-radius: 10px;
+      padding: 8px 10px;
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 5px;
     }
 
     .guide-card-title {
-      font-size: 10.5px;
+      font-size: 10px;
       font-weight: 900;
-      letter-spacing: 1px;
+      letter-spacing: 0.8px;
       text-transform: uppercase;
       color: var(--accent-cyan);
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
     }
 
     .guide-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 8px;
-      padding: 2px 0;
+      gap: 6px;
+      padding: 1px 0;
     }
 
     .guide-desc {
       color: var(--text-sub);
-      font-size: 10.5px;
+      font-size: 10px;
       font-weight: 600;
     }
 
@@ -781,9 +990,9 @@
       background: var(--card-bg);
       border: 1px solid var(--border-accent);
       border-bottom: 2px solid var(--border-accent);
-      border-radius: 6px;
-      padding: 2px 6px;
-      font-size: 9.5px;
+      border-radius: 5px;
+      padding: 2px 5px;
+      font-size: 9px;
       font-family: monospace;
       font-weight: 800;
       color: var(--text-main);
@@ -800,80 +1009,85 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 16px;
+      gap: 10px;
       width: 100%;
-      margin-top: 2px;
+      max-width: 440px;
+      margin-top: 4px;
+      padding: 2px 4px;
+      touch-action: none;
+      user-select: none;
     }
 
-    .controls {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(2, 1fr);
-      gap: 6px;
-      width: 160px;
-      height: 100px;
-    }
-
-    .btn {
+    .turbo-touch-btn {
+      flex: 1;
+      height: 48px;
       background: var(--panel-bg);
-      border: 1px solid var(--border-accent);
-      border-radius: 10px;
-      color: var(--text-main);
+      border: 1.5px dashed var(--border-accent);
+      border-radius: 14px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      color: var(--text-sub);
+      font-weight: 900;
+      font-size: 11px;
+      letter-spacing: 0.8px;
+      transition: all 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+      touch-action: none;
+      -webkit-tap-highlight-color: transparent;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+    }
+
+    .turbo-touch-btn.ready {
+      border: 1.5px solid #00e5ff;
+      color: #00e5ff;
+      box-shadow: 0 0 16px rgba(0, 229, 255, 0.35);
+      animation: pulseTurboBtn 1.2s infinite alternate;
+    }
+
+    @keyframes pulseTurboBtn {
+      from { transform: scale(1); box-shadow: 0 0 8px rgba(0, 229, 255, 0.3); }
+      to { transform: scale(1.02); box-shadow: 0 0 16px rgba(0, 229, 255, 0.6); }
+    }
+
+    .turbo-touch-btn.active {
+      background: #ff007f;
+      border: 1.5px solid #ffffff;
+      color: #ffffff;
+      box-shadow: 0 0 20px rgba(255, 0, 127, 0.9);
+      transform: scale(0.96);
+    }
+
+    .turbo-icon {
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    .touch-pause-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: var(--panel-bg);
+      border: 1.5px solid var(--border-accent);
+      color: var(--text-sub);
       font-size: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      backdrop-filter: blur(6px);
-    }
-
-    .btn:active {
-      filter: brightness(1.3);
-      transform: scale(0.95);
-    }
-
-    .btn-up { grid-column: 2; grid-row: 1; }
-    .btn-left { grid-column: 1; grid-row: 2; }
-    .btn-down { grid-column: 2; grid-row: 2; }
-    .btn-right { grid-column: 3; grid-row: 2; }
-
-    .turbo-touch-btn {
-      width: 80px;
-      height: 100px;
-      background: var(--panel-bg);
-      border: 2px dashed var(--border-accent);
-      border-radius: 14px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-      cursor: pointer;
-      color: var(--text-sub);
-      font-weight: 900;
-      font-size: 11px;
-      letter-spacing: 0.5px;
-      transition: all 0.2s ease;
+      backdrop-filter: blur(8px);
+      transition: all 0.15s ease;
       touch-action: none;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    .turbo-touch-btn.ready {
-      border: 2px solid #00e5ff;
-      color: #00e5ff;
-      box-shadow: 0 0 14px rgba(0, 229, 255, 0.4);
-    }
-
-    .turbo-touch-btn.active {
-      background: #ff007f;
-      border: 2px solid #ffffff;
-      color: #ffffff;
-      box-shadow: 0 0 20px rgba(255, 0, 127, 0.8);
-      transform: scale(0.96);
-    }
-
-    .turbo-icon {
-      font-size: 24px;
-      line-height: 1;
+    .touch-pause-btn:active {
+      background: var(--card-bg);
+      border-color: var(--accent-green);
+      color: var(--accent-green);
+      transform: scale(0.92);
     }
 
     @media (min-width: 768px) {
@@ -889,6 +1103,7 @@
       <div>COINS: <span id="coins" class="coin-badge">🪙 0</span></div>
       <div>BEST: <span id="high-score">0</span></div>
       <div class="audio-controls">
+        <button class="audio-btn" id="sound-header-btn" onclick="toggleSettingsModal(true)" title="Game Settings">⚙️</button>
         <button class="audio-btn" id="controls-header-btn" onclick="toggleControlsModal(true)" title="Game Controls & Guide">🎮</button>
         <button class="audio-btn" id="bgm-toggle-btn" onclick="toggleBGM()" title="Toggle Background Music">🎵</button>
         <button class="audio-btn" id="audio-toggle-btn" onclick="toggleAudio()" title="Toggle Sound Effects">🔊</button>
@@ -970,35 +1185,11 @@
           BEST SCORE: <span id="home-high-score">0</span>
         </div>
 
-        <div class="menu-group" id="menu-settings">
-          <div>
-            <div class="setting-label">Theme</div>
-            <div class="option-selector">
-              <button class="option-btn active" id="theme-dark-btn" onclick="setTheme('dark')">Dark</button>
-              <button class="option-btn" id="theme-light-btn" onclick="setTheme('light')">Light</button>
-            </div>
-          </div>
-          <div>
-            <div class="setting-label">Difficulty</div>
-            <div class="option-selector">
-              <button class="option-btn active" onclick="setDifficulty('easy')">Easy</button>
-              <button class="option-btn" onclick="setDifficulty('medium')">Medium</button>
-              <button class="option-btn" onclick="setDifficulty('hard')">Hard</button>
-            </div>
-          </div>
-          <div>
-            <div class="setting-label">Walls</div>
-            <div class="option-selector">
-              <button class="option-btn active" onclick="setWalls(true)">On</button>
-              <button class="option-btn" onclick="setWalls(false)">Off</button>
-            </div>
-          </div>
-        </div>
-
         <div class="action-btn-group">
           <button class="action-btn" id="start-btn" onclick="handlePrimaryAction()">Start Game</button>
+          <button class="action-btn secondary" id="settings-btn" onclick="toggleSettingsModal(true)">Settings ⚙️</button>
           <button class="action-btn shop-btn" id="open-shop-btn" onclick="toggleShop(true)">Snake Shop 🛒</button>
-          <button class="action-btn secondary" id="controls-btn" onclick="toggleControlsModal(true)">Controls & Guide 🎮</button>
+          <button class="action-btn secondary" id="controls-btn" onclick="toggleControlsModal(true)">Controls &amp; Guide 🎮</button>
           <button class="action-btn share-btn" id="share-btn" onclick="generateShareCard()">Share High Score 📸</button>
           <button class="action-btn secondary" id="home-btn" style="display: none;" onclick="returnToHome()">Home Screen</button>
         </div>
@@ -1023,8 +1214,8 @@
               </div>
             </div>
             <div class="guide-row">
-              <span class="guide-desc">Mobile / Touch</span>
-              <span class="guide-desc" style="color: var(--text-main); font-weight: 700;">Swipe on Canvas or D-Pad</span>
+              <span class="guide-desc">Mobile Phone</span>
+              <span class="guide-desc" style="color: var(--text-main); font-weight: 700;">Swipe Anywhere on Screen</span>
             </div>
           </div>
 
@@ -1086,7 +1277,93 @@
           </div>
         </div>
 
-        <button class="action-btn" style="margin-top: 12px; max-width: 200px;" onclick="toggleControlsModal(false)">Got It!</button>
+        <button class="action-btn" style="margin-top: 10px; max-width: 200px;" onclick="toggleControlsModal(false)">Got It!</button>
+      </div>
+
+      <div id="settings-modal" class="shop-modal hidden">
+        <div class="shop-header">
+          <div class="shop-title" style="color: var(--accent-cyan);">SETTINGS ⚙️</div>
+          <button class="audio-btn" onclick="toggleSettingsModal(false)" style="font-size: 15px;">✕</button>
+        </div>
+
+        <div class="settings-modal-content">
+          <!-- Pool 1: Gameplay Configuration -->
+          <div class="settings-group-card">
+            <div class="settings-group-title">🎮 Gameplay</div>
+            
+            <div class="setting-row">
+              <div class="setting-label">Difficulty</div>
+              <div class="option-selector">
+                <button class="option-btn active" id="diff-easy-btn" onclick="setDifficulty('easy')">Easy</button>
+                <button class="option-btn" id="diff-medium-btn" onclick="setDifficulty('medium')">Medium</button>
+                <button class="option-btn" id="diff-hard-btn" onclick="setDifficulty('hard')">Hard</button>
+              </div>
+            </div>
+
+            <div class="setting-row">
+              <div class="setting-label">Walls</div>
+              <div class="option-selector">
+                <button class="option-btn active" id="walls-on-btn" onclick="setWalls(true)">On</button>
+                <button class="option-btn" id="walls-off-btn" onclick="setWalls(false)">Off</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pool 2: Display & Tactile Feel -->
+          <div class="settings-group-card">
+            <div class="settings-group-title">🎨 Theme &amp; Feedback</div>
+
+            <div class="setting-row">
+              <div class="setting-label">Theme</div>
+              <div class="option-selector">
+                <button class="option-btn active" id="theme-dark-btn" onclick="setTheme('dark')">Dark</button>
+                <button class="option-btn" id="theme-light-btn" onclick="setTheme('light')">Light</button>
+              </div>
+            </div>
+
+            <div class="setting-row">
+              <div class="setting-label">Haptic Vibration</div>
+              <div class="option-selector">
+                <button class="option-btn active" id="haptic-on-btn" onclick="setHaptics(true)">On 📳</button>
+                <button class="option-btn" id="haptic-off-btn" onclick="setHaptics(false)">Off</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pool 3: Sound & Volume -->
+          <div class="settings-group-card">
+            <div class="settings-group-title">🔊 Sound &amp; Volume</div>
+
+            <!-- Background Music Slider -->
+            <div class="volume-header">
+              <div class="volume-title-group">
+                <span>🎵</span>
+                <span>Music Volume</span>
+              </div>
+              <span class="volume-badge" id="bgm-val-badge">70%</span>
+            </div>
+            <div class="slider-row">
+              <input type="range" id="bgm-range" class="volume-slider" min="0" max="100" value="70">
+              <button class="quick-mute-btn" id="bgm-mute-btn" onclick="toggleBGM()" title="Mute/Unmute Music">🎵</button>
+            </div>
+
+            <!-- Sound Effects Slider -->
+            <div class="volume-header" style="margin-top: 4px;">
+              <div class="volume-title-group">
+                <span>🔔</span>
+                <span>Effects Volume</span>
+              </div>
+              <span class="volume-badge" id="sfx-val-badge">80%</span>
+            </div>
+            <div class="slider-row">
+              <input type="range" id="sfx-range" class="volume-slider" min="0" max="100" value="80">
+              <button class="quick-mute-btn" id="sfx-mute-btn" onclick="toggleAudio()" title="Mute/Unmute SFX">🔔</button>
+            </div>
+            <button class="test-sfx-btn" onclick="playTestSound()">🔊 Test Sound</button>
+          </div>
+        </div>
+
+        <button class="action-btn" style="margin-top: 10px; max-width: 200px;" onclick="toggleSettingsModal(false)">Save &amp; Close</button>
       </div>
 
       <div id="shop-modal" class="shop-modal hidden">
@@ -1095,7 +1372,7 @@
           <div class="home-highscore-badge">🪙 <span id="shop-coins">0</span></div>
         </div>
         <div class="shop-grid" id="shop-grid"></div>
-        <button class="action-btn secondary" style="margin-top: 12px; max-width: 200px;" onclick="toggleShop(false)">Back to Menu</button>
+        <button class="action-btn secondary" style="margin-top: 10px; max-width: 200px;" onclick="toggleShop(false)">Back to Menu</button>
       </div>
     </div>
 
@@ -1110,18 +1387,13 @@
     <!-- Active Powerups Ribbon -->
     <div class="powerup-bar-container" id="powerup-bar"></div>
 
-    <!-- Controls for Touch / Mobile including Turbo trigger -->
-    <div class="controls-wrapper">
-      <div class="controls">
-        <button class="btn btn-up" id="btn-up">▲</button>
-        <button class="btn btn-left" id="btn-left">◀</button>
-        <button class="btn btn-down" id="btn-down">▼</button>
-        <button class="btn btn-right" id="btn-right">▶</button>
-      </div>
+    <!-- Controls for Mobile Phone: Swipe to turn; hold Turbo button to boost -->
+    <div class="controls-wrapper" id="controls-wrapper">
       <button class="turbo-touch-btn" id="turbo-touch-btn" title="Hold to activate Turbo">
         <span class="turbo-icon">⚡</span>
-        <span>TURBO</span>
+        <span>HOLD FOR TURBO</span>
       </button>
+      <button class="touch-pause-btn" id="touch-pause-btn" title="Pause Game">⏸</button>
     </div>
   </div>
 
@@ -1142,7 +1414,8 @@
     const shopModal = document.getElementById('shop-modal');
     const shopGrid = document.getElementById('shop-grid');
     const controlsModal = document.getElementById('controls-modal');
-    const menuSettings = document.getElementById('menu-settings');
+    const settingsModal = document.getElementById('settings-modal');
+    const settingsBtn = document.getElementById('settings-btn');
     const comboDisplay = document.getElementById('combo-display');
     const comboGauge = document.getElementById('combo-gauge');
     const achievementsBar = document.getElementById('achievements-bar');
@@ -1153,25 +1426,79 @@
     const turboStatus = document.getElementById('turbo-status');
     const turboTouchBtn = document.getElementById('turbo-touch-btn');
     const bgmToggleBtn = document.getElementById('bgm-toggle-btn');
+    const audioToggleBtn = document.getElementById('audio-toggle-btn');
+    const bgmRange = document.getElementById('bgm-range');
+    const sfxRange = document.getElementById('sfx-range');
+    const bgmValBadge = document.getElementById('bgm-val-badge');
+    const sfxValBadge = document.getElementById('sfx-val-badge');
+    const bgmMuteBtn = document.getElementById('bgm-mute-btn');
+    const sfxMuteBtn = document.getElementById('sfx-mute-btn');
+    const controlsWrapper = document.getElementById('controls-wrapper');
+    const touchPauseBtn = document.getElementById('touch-pause-btn');
 
     const GRID_SIZE = 20;
     const TILE_COUNT = canvas.width / GRID_SIZE;
 
-    let audioEnabled = true;
+    let audioEnabled = localStorage.getItem('snake_sfx_enabled') !== 'false';
     let bgmEnabled = localStorage.getItem('snake_bgm_enabled') !== 'false';
+    let hapticsEnabled = localStorage.getItem('snake_haptics_enabled') !== 'false';
+
+    function triggerHaptic(duration = 12) {
+      if (!hapticsEnabled || !navigator.vibrate) return;
+      try {
+        navigator.vibrate(duration);
+      } catch (e) {}
+    }
+
+    function setHaptics(enable) {
+      hapticsEnabled = enable;
+      localStorage.setItem('snake_haptics_enabled', enable);
+      const onBtn = document.getElementById('haptic-on-btn');
+      const offBtn = document.getElementById('haptic-off-btn');
+      if (onBtn) onBtn.classList.toggle('active', enable);
+      if (offBtn) offBtn.classList.toggle('active', !enable);
+      if (enable) triggerHaptic(20);
+    }
+
+    // Volume levels between 0 and 100
+    let sfxVolume = localStorage.getItem('snake_sfx_volume') !== null ? parseInt(localStorage.getItem('snake_sfx_volume')) : 80;
+    let bgmVolume = localStorage.getItem('snake_bgm_volume') !== null ? parseInt(localStorage.getItem('snake_bgm_volume')) : 70;
     
-    // Audio Context with cross-browser compatibility
     const AudioContextClass = window.AudioContext || window.webkitAudioContext;
     let audioCtx = new AudioContextClass();
 
+    let sfxMasterGain = null;
     let bgmMasterGain = null;
     let bgmFilter = null;
     let bgmInterval = null;
     let bgmStep = 0;
     let isBgmPlaying = false;
 
-    // Upbeat Chiptune Arcade Sound Track (16-beat loop with bass, melody & percussion)
-    // Melodic notes in Hz (A-minor / C-major energetic progression)
+    function initSFXMasterGain() {
+      if (!sfxMasterGain && audioCtx) {
+        sfxMasterGain = audioCtx.createGain();
+        const effectiveVol = audioEnabled ? (sfxVolume / 100) : 0;
+        sfxMasterGain.gain.setValueAtTime(effectiveVol, audioCtx.currentTime);
+        sfxMasterGain.connect(audioCtx.destination);
+      }
+    }
+
+    function updateSFXMasterGain() {
+      if (!audioCtx) return;
+      initSFXMasterGain();
+      const effectiveVol = audioEnabled ? (sfxVolume / 100) : 0;
+      sfxMasterGain.gain.cancelScheduledValues(audioCtx.currentTime);
+      sfxMasterGain.gain.setTargetAtTime(effectiveVol, audioCtx.currentTime, 0.04);
+    }
+
+    function updateBGMMasterGain() {
+      if (!audioCtx) return;
+      initBGM();
+      const effectiveVol = bgmEnabled ? (bgmVolume / 100) * 0.18 : 0;
+      bgmMasterGain.gain.cancelScheduledValues(audioCtx.currentTime);
+      bgmMasterGain.gain.setTargetAtTime(effectiveVol, audioCtx.currentTime, 0.04);
+    }
+
     const BGM_MELODY = [
       440, 0, 523.25, 659.25, 587.33, 523.25, 440, 0,
       659.25, 783.99, 880, 783.99, 659.25, 587.33, 523.25, 587.33,
@@ -1184,7 +1511,6 @@
       146.83, 146.83, 146.83, 146.83, 164.81, 164.81, 123.47, 123.47
     ];
 
-    // Global unlocker ensuring browser autoplay policy is satisfied on user tap/click
     function ensureAudioUnlocked() {
       if (!audioCtx) {
         audioCtx = new AudioContextClass();
@@ -1208,7 +1534,8 @@
         bgmFilter.type = 'lowpass';
         bgmFilter.frequency.setValueAtTime(4500, audioCtx.currentTime);
 
-        bgmMasterGain.gain.setValueAtTime(bgmEnabled ? 0.16 : 0, audioCtx.currentTime);
+        const effectiveVol = bgmEnabled ? (bgmVolume / 100) * 0.18 : 0;
+        bgmMasterGain.gain.setValueAtTime(effectiveVol, audioCtx.currentTime);
         bgmMasterGain.connect(bgmFilter);
         bgmFilter.connect(audioCtx.destination);
       }
@@ -1223,7 +1550,6 @@
       initBGM();
       const now = audioCtx.currentTime;
 
-      // 1. Bassline (Punchy rhythmic sawtooth/square bass)
       const bassIndex = Math.floor(bgmStep / 2) % BGM_BASS.length;
       if (bgmStep % 2 === 0) {
         const bassFreq = BGM_BASS[bassIndex];
@@ -1243,7 +1569,6 @@
         bassOsc.stop(now + 0.19);
       }
 
-      // 2. Lead Arpeggio Melody
       const leadFreq = BGM_MELODY[bgmStep % BGM_MELODY.length];
       if (leadFreq > 0) {
         const leadOsc = audioCtx.createOscillator();
@@ -1262,7 +1587,6 @@
         leadOsc.stop(now + 0.13);
       }
 
-      // 3. Crisp Hi-Hat / Percussion Click on every off-beat
       if (bgmStep % 2 === 1) {
         const hatOsc = audioCtx.createOscillator();
         const hatGain = audioCtx.createGain();
@@ -1285,16 +1609,12 @@
     }
 
     function startBGM() {
-      if (!bgmEnabled) return;
+      if (!bgmEnabled || bgmVolume === 0) return;
       if (audioCtx.state === 'suspended') {
         audioCtx.resume();
       }
       initBGM();
-
-      if (bgmMasterGain) {
-        bgmMasterGain.gain.cancelScheduledValues(audioCtx.currentTime);
-        bgmMasterGain.gain.setValueAtTime(0.16, audioCtx.currentTime);
-      }
+      updateBGMMasterGain();
 
       if (!bgmInterval) {
         isBgmPlaying = true;
@@ -1318,29 +1638,128 @@
       ensureAudioUnlocked();
       bgmEnabled = !bgmEnabled;
       localStorage.setItem('snake_bgm_enabled', bgmEnabled);
+      updateAudioUI();
 
-      if (bgmToggleBtn) {
-        bgmToggleBtn.classList.toggle('muted', !bgmEnabled);
-        bgmToggleBtn.textContent = bgmEnabled ? '🎵' : '🔇';
-      }
-
-      if (bgmEnabled) {
+      if (bgmEnabled && bgmVolume > 0) {
         startBGM();
       } else {
         stopBGM();
       }
     }
 
+    function toggleAudio() {
+      ensureAudioUnlocked();
+      audioEnabled = !audioEnabled;
+      localStorage.setItem('snake_sfx_enabled', audioEnabled);
+      updateAudioUI();
+      updateSFXMasterGain();
+      if (audioEnabled) {
+        playSound('eat');
+      }
+    }
+
+    function handleBgmSliderChange(val) {
+      bgmVolume = parseInt(val, 10);
+      localStorage.setItem('snake_bgm_volume', bgmVolume);
+      if (bgmVolume > 0 && !bgmEnabled) {
+        bgmEnabled = true;
+        localStorage.setItem('snake_bgm_enabled', true);
+      } else if (bgmVolume === 0 && bgmEnabled) {
+        bgmEnabled = false;
+        localStorage.setItem('snake_bgm_enabled', false);
+      }
+      updateAudioUI();
+      updateBGMMasterGain();
+      if (bgmEnabled && !isBgmPlaying && (isRunning || isIntro)) {
+        startBGM();
+      }
+    }
+
+    function handleSfxSliderChange(val) {
+      sfxVolume = parseInt(val, 10);
+      localStorage.setItem('snake_sfx_volume', sfxVolume);
+      if (sfxVolume > 0 && !audioEnabled) {
+        audioEnabled = true;
+        localStorage.setItem('snake_sfx_enabled', true);
+      } else if (sfxVolume === 0 && audioEnabled) {
+        audioEnabled = false;
+        localStorage.setItem('snake_sfx_enabled', false);
+      }
+      updateAudioUI();
+      updateSFXMasterGain();
+    }
+
+    function playTestSound() {
+      ensureAudioUnlocked();
+      if (!audioEnabled && sfxVolume > 0) {
+        audioEnabled = true;
+        updateAudioUI();
+        updateSFXMasterGain();
+      }
+      playSound('bonus');
+    }
+
+    function updateAudioUI() {
+      if (bgmRange) bgmRange.value = bgmVolume;
+      if (sfxRange) sfxRange.value = sfxVolume;
+
+      if (bgmValBadge) {
+        bgmValBadge.textContent = bgmEnabled ? `${bgmVolume}%` : 'Muted';
+      }
+      if (sfxValBadge) {
+        sfxValBadge.textContent = audioEnabled ? `${sfxVolume}%` : 'Muted';
+      }
+
+      if (bgmToggleBtn) {
+        bgmToggleBtn.classList.toggle('muted', !bgmEnabled || bgmVolume === 0);
+        bgmToggleBtn.textContent = (bgmEnabled && bgmVolume > 0) ? '🎵' : '🔇';
+      }
+      if (bgmMuteBtn) {
+        bgmMuteBtn.classList.toggle('muted', !bgmEnabled || bgmVolume === 0);
+        bgmMuteBtn.textContent = (bgmEnabled && bgmVolume > 0) ? '🎵' : '🔇';
+      }
+
+      if (audioToggleBtn) {
+        audioToggleBtn.classList.toggle('muted', !audioEnabled || sfxVolume === 0);
+        audioToggleBtn.textContent = (audioEnabled && sfxVolume > 0) ? '🔔' : '🔕';
+      }
+      if (sfxMuteBtn) {
+        sfxMuteBtn.classList.toggle('muted', !audioEnabled || sfxVolume === 0);
+        sfxMuteBtn.textContent = (audioEnabled && sfxVolume > 0) ? '🔔' : '🔕';
+      }
+    }
+
+    function toggleSettingsModal(show) {
+      if (show) {
+        if (isRunning && !isPaused) {
+          pauseGame();
+        }
+        updateAudioUI();
+        if (settingsModal) settingsModal.classList.remove('hidden');
+        if (controlsModal) controlsModal.classList.add('hidden');
+        if (shopModal) shopModal.classList.add('hidden');
+      } else {
+        if (settingsModal) settingsModal.classList.add('hidden');
+      }
+    }
+
+    // Retain alias for any existing callers
+    function toggleSoundModal(show) {
+      toggleSettingsModal(show);
+    }
+
     function playSound(type) {
-      if (!audioEnabled) return;
+      if (!audioEnabled || sfxVolume === 0) return;
       if (audioCtx.state === 'suspended') {
         audioCtx.resume();
       }
 
+      initSFXMasterGain();
+
       const osc = audioCtx.createOscillator();
       const gain = audioCtx.createGain();
       osc.connect(gain);
-      gain.connect(audioCtx.destination);
+      gain.connect(sfxMasterGain);
 
       const now = audioCtx.currentTime;
 
@@ -1348,7 +1767,7 @@
         osc.type = 'sine';
         osc.frequency.setValueAtTime(320, now);
         osc.frequency.exponentialRampToValueAtTime(640, now + 0.1);
-        gain.gain.setValueAtTime(0.2, now);
+        gain.gain.setValueAtTime(0.25, now);
         gain.gain.linearRampToValueAtTime(0.01, now + 0.1);
         osc.start(now);
         osc.stop(now + 0.1);
@@ -1356,7 +1775,7 @@
         osc.type = 'triangle';
         osc.frequency.setValueAtTime(440, now);
         osc.frequency.exponentialRampToValueAtTime(880, now + 0.2);
-        gain.gain.setValueAtTime(0.3, now);
+        gain.gain.setValueAtTime(0.35, now);
         gain.gain.linearRampToValueAtTime(0.01, now + 0.2);
         osc.start(now);
         osc.stop(now + 0.2);
@@ -1365,7 +1784,7 @@
         osc.frequency.setValueAtTime(220, now);
         osc.frequency.linearRampToValueAtTime(550, now + 0.15);
         osc.frequency.linearRampToValueAtTime(880, now + 0.3);
-        gain.gain.setValueAtTime(0.16, now);
+        gain.gain.setValueAtTime(0.2, now);
         gain.gain.linearRampToValueAtTime(0.01, now + 0.3);
         osc.start(now);
         osc.stop(now + 0.3);
@@ -1373,7 +1792,7 @@
         osc.type = 'triangle';
         osc.frequency.setValueAtTime(520, now);
         osc.frequency.linearRampToValueAtTime(900, now + 0.2);
-        gain.gain.setValueAtTime(0.25, now);
+        gain.gain.setValueAtTime(0.3, now);
         gain.gain.linearRampToValueAtTime(0.01, now + 0.2);
         osc.start(now);
         osc.stop(now + 0.2);
@@ -1381,17 +1800,11 @@
         osc.type = 'sawtooth';
         osc.frequency.setValueAtTime(300, now);
         osc.frequency.exponentialRampToValueAtTime(70, now + 0.4);
-        gain.gain.setValueAtTime(0.3, now);
+        gain.gain.setValueAtTime(0.35, now);
         gain.gain.linearRampToValueAtTime(0.01, now + 0.4);
         osc.start(now);
         osc.stop(now + 0.4);
       }
-    }
-
-    function toggleAudio() {
-      audioEnabled = !audioEnabled;
-      const btn = document.getElementById('audio-toggle-btn');
-      if (btn) btn.textContent = audioEnabled ? '🔊' : '🔇';
     }
 
     let particles = [];
@@ -1617,9 +2030,12 @@
     updateHighScoreUI();
     updateCoinsUI();
     updateTurboUI();
-    if (bgmToggleBtn) {
-      bgmToggleBtn.classList.toggle('muted', !bgmEnabled);
-      bgmToggleBtn.textContent = bgmEnabled ? '🎵' : '🔇';
+    updateAudioUI();
+    setHaptics(hapticsEnabled);
+
+    // Attach real-time input listeners to volume sliders
+    if (sfxRange) {
+      sfxRange.addEventListener('input', (e) => handleSfxSliderChange(e.target.value));
     }
 
     function setTheme(theme) {
@@ -1718,7 +2134,8 @@
       Object.keys(achievements).forEach(key => {
         const ach = achievements[key];
         ach.unlocked = false;
-        if (ach.el) ach.el.classList.remove('unlocked');
+        const el = document.getElementById(`ach-${key}`);
+        if (el) el.classList.remove('unlocked');
       });
     }
 
@@ -1727,7 +2144,15 @@
         const ach = achievements[key];
         if (!ach.unlocked && currentScore >= ach.score) {
           ach.unlocked = true;
-          if (ach.el) ach.el.classList.add('unlocked');
+          const el = document.getElementById(`ach-${key}`);
+          if (el) {
+            el.classList.add('unlocked');
+            const rect = el.getBoundingClientRect();
+            const canvasRect = canvas.getBoundingClientRect();
+            const relX = (rect.left + rect.width / 2 - canvasRect.left) / GRID_SIZE;
+            const relY = 1;
+            spawnParticles(relX, relY, key === 'gold' ? '#ffd700' : (key === 'titanium' ? '#c084fc' : '#38bdf8'), 20);
+          }
           playSound('bonus');
         }
       });
@@ -1783,10 +2208,12 @@
 
     function setDifficulty(diff) {
       selectedDifficulty = diff;
-      document.querySelectorAll('#menu-settings .option-selector')[1]
-        .querySelectorAll('.option-btn').forEach(btn => {
-          btn.classList.toggle('active', btn.textContent.toLowerCase() === diff);
-        });
+      const easyBtn = document.getElementById('diff-easy-btn');
+      const medBtn = document.getElementById('diff-medium-btn');
+      const hardBtn = document.getElementById('diff-hard-btn');
+      if (easyBtn) easyBtn.classList.toggle('active', diff === 'easy');
+      if (medBtn) medBtn.classList.toggle('active', diff === 'medium');
+      if (hardBtn) hardBtn.classList.toggle('active', diff === 'hard');
 
       if (diff === 'easy') { stepInterval = 140; baseScoreValue = 5; }
       else if (diff === 'medium') { stepInterval = 90; baseScoreValue = 10; }
@@ -1795,9 +2222,10 @@
 
     function setWalls(enable) {
       hasWalls = enable;
-      const btns = document.querySelectorAll('#menu-settings .option-selector')[2].querySelectorAll('.option-btn');
-      btns[0].classList.toggle('active', enable);
-      btns[1].classList.toggle('active', !enable);
+      const onBtn = document.getElementById('walls-on-btn');
+      const offBtn = document.getElementById('walls-off-btn');
+      if (onBtn) onBtn.classList.toggle('active', enable);
+      if (offBtn) offBtn.classList.toggle('active', !enable);
     }
 
     function initIntro() {
@@ -1835,35 +2263,6 @@
       floatingTexts = [];
       if (scoreEl) scoreEl.textContent = score;
       placeFood();
-    }
-
-    function resetAchievements() {
-      Object.keys(achievements).forEach(key => {
-        const ach = achievements[key];
-        ach.unlocked = false;
-        const el = document.getElementById(`ach-${key}`);
-        if (el) el.classList.remove('unlocked');
-      });
-    }
-
-    function checkAchievements(currentScore) {
-      Object.keys(achievements).forEach(key => {
-        const ach = achievements[key];
-        if (!ach.unlocked && currentScore >= ach.score) {
-          ach.unlocked = true;
-          const el = document.getElementById(`ach-${key}`);
-          if (el) {
-            el.classList.add('unlocked');
-            // Spawn celebratory reward particles centered over the unlocked badge
-            const rect = el.getBoundingClientRect();
-            const canvasRect = canvas.getBoundingClientRect();
-            const relX = (rect.left + rect.width / 2 - canvasRect.left) / GRID_SIZE;
-            const relY = 1;
-            spawnParticles(relX, relY, key === 'gold' ? '#ffd700' : (key === 'titanium' ? '#c084fc' : '#38bdf8'), 20);
-          }
-          playSound('bonus');
-        }
-      });
     }
 
     function placeFood() {
@@ -2017,9 +2416,8 @@
 
       overlayTitle.textContent = "PAUSED";
       startBtn.textContent = "Resume";
-      menuSettings.style.display = 'none';
-      openShopBtn.style.display = 'none';
-      homeBtn.style.display = 'block';
+      if (openShopBtn) openShopBtn.style.display = 'none';
+      if (homeBtn) homeBtn.style.display = 'block';
       overlay.classList.remove('hidden');
     }
 
@@ -2038,9 +2436,8 @@
 
       overlayTitle.textContent = "SNAKE";
       startBtn.textContent = "Start Game";
-      menuSettings.style.display = 'flex';
-      openShopBtn.style.display = 'block';
-      homeBtn.style.display = 'none';
+      if (openShopBtn) openShopBtn.style.display = 'block';
+      if (homeBtn) homeBtn.style.display = 'none';
       achievementsBar.classList.remove('active');
 
       resetComboUI();
@@ -2065,9 +2462,8 @@
 
       overlayTitle.textContent = "GAME OVER";
       startBtn.textContent = "Play Again";
-      menuSettings.style.display = 'flex';
-      openShopBtn.style.display = 'block';
-      homeBtn.style.display = 'none';
+      if (openShopBtn) openShopBtn.style.display = 'block';
+      if (homeBtn) homeBtn.style.display = 'none';
       achievementsBar.classList.remove('active');
 
       overlay.classList.remove('hidden');
@@ -2245,7 +2641,6 @@
 
       const skin = SNAKE_SHOP_SKINS[equippedSkin] || SNAKE_SHOP_SKINS.green;
 
-      // Draw normal red food
       ctx.fillStyle = '#f44336';
       ctx.shadowColor = '#f44336';
       ctx.shadowBlur = 8;
@@ -2254,7 +2649,6 @@
       ctx.fill();
       ctx.shadowBlur = 0;
 
-      // Draw 2x bonus food with equipped skin color
       if (bonusFood) {
         const bonusPulse = 1 + 0.12 * Math.sin(performance.now() / 140);
         const radius = (GRID_SIZE / 2 - 1) * bonusPulse;
@@ -2281,7 +2675,6 @@
         ctx.fillText('2x', bX, bY + 0.5);
       }
 
-      // Draw active powerup token
       if (activePowerupItem) {
         ctx.shadowColor = activePowerupItem.color;
         ctx.shadowBlur = 14;
@@ -2335,7 +2728,6 @@
           ctx.fillStyle = i === 0 ? skin.head : skin.body;
         }
 
-        // Reduced opacity when Ghost powerup is active
         if (isGhost) {
           ctx.globalAlpha = 0.22;
         } else {
@@ -2471,6 +2863,7 @@
       if (isPaused) resumeGame();
       if (newDir.x === -dir.x && newDir.y === -dir.y) return;
       nextDir = newDir;
+      triggerHaptic(12);
     }
 
     window.addEventListener('keydown', (e) => {
@@ -2489,6 +2882,10 @@
         case 'ArrowLeft': case 'a': case 'A': handleDirectionInput({ x: -1, y: 0 }); break;
         case 'ArrowRight': case 'd': case 'D': handleDirectionInput({ x: 1, y: 0 }); break;
         case 'Escape':
+          if (settingsModal && !settingsModal.classList.contains('hidden')) {
+            toggleSettingsModal(false);
+            return;
+          }
           if (controlsModal && !controlsModal.classList.contains('hidden')) {
             toggleControlsModal(false);
             return;
@@ -2514,54 +2911,126 @@
       }
     });
 
+    // Zero-latency touch binding helper for buttons without 300ms mobile delay
+    function bindTouchAction(element, onPress, onRelease = null) {
+      if (!element) return;
+
+      element.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        element.classList.add('pressed');
+        onPress();
+      }, { passive: false });
+
+      if (onRelease) {
+        element.addEventListener('touchend', (e) => {
+          e.preventDefault();
+          element.classList.remove('pressed');
+          onRelease();
+        }, { passive: false });
+
+        element.addEventListener('touchcancel', (e) => {
+          e.preventDefault();
+          element.classList.remove('pressed');
+          onRelease();
+        }, { passive: false });
+      } else {
+        element.addEventListener('touchend', (e) => {
+          e.preventDefault();
+          element.classList.remove('pressed');
+        }, { passive: false });
+      }
+
+      // Mouse fallback for testing
+      element.addEventListener('mousedown', (e) => {
+        element.classList.add('pressed');
+        onPress();
+      });
+
+      if (onRelease) {
+        element.addEventListener('mouseup', () => {
+          element.classList.remove('pressed');
+          onRelease();
+        });
+        element.addEventListener('mouseleave', () => {
+          element.classList.remove('pressed');
+          onRelease();
+        });
+      } else {
+        element.addEventListener('mouseup', () => element.classList.remove('pressed'));
+      }
+    }
+
+    // Turbo Touch Button with immediate press feedback
     if (turboTouchBtn) {
-      turboTouchBtn.addEventListener('touchstart', (e) => {
-        e.preventDefault();
+      bindTouchAction(turboTouchBtn, () => {
         startTurboBoost();
-      }, { passive: false });
-
-      turboTouchBtn.addEventListener('touchend', (e) => {
-        e.preventDefault();
+        triggerHaptic(25);
+      }, () => {
         stopTurboBoost();
-      }, { passive: false });
-
-      turboTouchBtn.addEventListener('mousedown', (e) => {
-        e.preventDefault();
-        startTurboBoost();
       });
     }
 
-    window.addEventListener('mouseup', () => {
-      if (isTurboActive) stopTurboBoost();
-    });
+    // Quick mobile pause button
+    if (touchPauseBtn) {
+      bindTouchAction(touchPauseBtn, () => {
+        triggerHaptic(18);
+        if (isRunning) {
+          isPaused ? resumeGame() : pauseGame();
+        }
+      });
+    }
 
-    document.getElementById('btn-up').addEventListener('click', () => handleDirectionInput({ x: 0, y: -1 }));
-    document.getElementById('btn-down').addEventListener('click', () => handleDirectionInput({ x: 0, y: 1 }));
-    document.getElementById('btn-left').addEventListener('click', () => handleDirectionInput({ x: -1, y: 0 }));
-    document.getElementById('btn-right').addEventListener('click', () => handleDirectionInput({ x: 1, y: 0 }));
+    // Continuous Live Touch Gesture Engine for Mobile Phone:
+    // Steer instantaneously by swiping across the screen. Threshold of 14px ensures prompt response.
+    let touchOriginX = 0;
+    let touchOriginY = 0;
+    let isTouchActive = false;
+    const SWIPE_THRESHOLD = 14;
 
-    let touchStartX = 0;
-    let touchStartY = 0;
+    function handleTouchGesture(touchX, touchY) {
+      const dx = touchX - touchOriginX;
+      const dy = touchY - touchOriginY;
+      const absDx = Math.abs(dx);
+      const absDy = Math.abs(dy);
 
-    canvas.addEventListener('touchstart', (e) => {
-      touchStartX = e.touches[0].clientX;
-      touchStartY = e.touches[0].clientY;
-    }, { passive: true });
-
-    canvas.addEventListener('touchend', (e) => {
-      if (!touchStartX || !touchStartY) return;
-      let dx = e.changedTouches[0].clientX - touchStartX;
-      let dy = e.changedTouches[0].clientY - touchStartY;
-
-      if (Math.abs(dx) > Math.abs(dy)) {
-        if (Math.abs(dx) > 20) handleDirectionInput(dx > 0 ? { x: 1, y: 0 } : { x: -1, y: 0 });
-      } else {
-        if (Math.abs(dy) > 20) handleDirectionInput(dy > 0 ? { x: 0, y: 1 } : { x: 0, y: -1 });
+      if (Math.max(absDx, absDy) >= SWIPE_THRESHOLD) {
+        if (absDx > absDy) {
+          handleDirectionInput(dx > 0 ? { x: 1, y: 0 } : { x: -1, y: 0 });
+        } else {
+          handleDirectionInput(dy > 0 ? { x: 0, y: 1 } : { x: 0, y: -1 });
+        }
+        // Reposition anchor point so the player can execute chaining turns in a single swipe stroke
+        touchOriginX = touchX;
+        touchOriginY = touchY;
       }
+    }
 
-      touchStartX = 0;
-      touchStartY = 0;
-    }, { passive: true });
+    canvasWrapper.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 1) {
+        isTouchActive = true;
+        touchOriginX = e.touches[0].clientX;
+        touchOriginY = e.touches[0].clientY;
+        if (isRunning && !isPaused) {
+          e.preventDefault();
+        }
+      }
+    }, { passive: false });
+
+    canvasWrapper.addEventListener('touchmove', (e) => {
+      if (!isTouchActive) return;
+      if (e.touches.length === 1) {
+        if (isRunning && !isPaused) {
+          e.preventDefault();
+        }
+        handleTouchGesture(e.touches[0].clientX, e.touches[0].clientY);
+      }
+    }, { passive: false });
+
+    ['touchend', 'touchcancel'].forEach(evt => {
+      canvasWrapper.addEventListener(evt, () => {
+        isTouchActive = false;
+      }, { passive: true });
+    });
 
     initIntro();
   </script>
